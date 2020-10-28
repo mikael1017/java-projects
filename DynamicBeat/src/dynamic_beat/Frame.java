@@ -1,10 +1,11 @@
 package dynamic_beat;
 
 
-import javax.swing.JFrame;
-import java.awt.Image;
 import java.awt.Graphics;
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 public class Frame extends JFrame{
 
@@ -23,6 +24,8 @@ public class Frame extends JFrame{
 
         ImageIcon imageicon = new ImageIcon("images/background.jpg");
         introBackground = imageicon.getImage();
+        Music introMusic = new Music("introMusic.mp3", true);
+        introMusic.start();
 
     }
 
