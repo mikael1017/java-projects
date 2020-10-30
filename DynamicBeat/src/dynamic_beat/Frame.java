@@ -15,6 +15,9 @@ public class Frame extends JFrame {
     private JLabel introBackground = new JLabel(new ImageIcon("images/background.jpg"));
     private JLabel menuBar = new JLabel(new ImageIcon("images/menuBar.png"));
     private JButton exitButton = new JButton(new ImageIcon("images/exit.png"));
+    private JButton exitButtonPressed = new JButton(new ImageIcon("images/exitEntered.png"));
+    private ImageIcon exitButtonImage = new ImageIcon("images/exit.png");
+    private ImageIcon exitButtonClickedImage = new ImageIcon("images/exitEntered.png");
 
     private int mouseX, mouseY;
     public Frame() {
@@ -49,7 +52,7 @@ public class Frame extends JFrame {
             }
         });
 
-        
+
         add(exitButton);
         add(menuBar);
         add(introBackground);
