@@ -29,8 +29,11 @@ public class Frame extends JFrame {
     private JButton startButton = new JButton(startButtonImage);
     private JButton quitButton = new JButton(quitButtonImage);
 
+    private Music currMusic = new Music("introMusic.mp3", true);
+
     private int mouseX, mouseY;
     public Frame() {
+        currMusic.start();
         setUndecorated(true);
         setTitle("Dynamic Beat");
         setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
@@ -84,7 +87,11 @@ public class Frame extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
+                currMusic.close();
+                currMusic = new Music("gameMusic.mp3", true);
+                currMusic.start();
                 startGame();
+
             }
         });
 
@@ -151,6 +158,9 @@ public class Frame extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
+                currMusic.close();
+                currMusic = new Music("introMusic.mp3", true);
+                currMusic.start();
                 mainPage();
             }
         });
@@ -164,8 +174,6 @@ public class Frame extends JFrame {
         add(background);
         pack();
         
-        Music introMusic = new Music("introMusic.mp3", true);
-        introMusic.start();
         
 
         setVisible(true);
@@ -186,5 +194,6 @@ public class Frame extends JFrame {
         quitButton.setVisible(true);
         backButton.setVisible(false);
     }
+
 
 }
