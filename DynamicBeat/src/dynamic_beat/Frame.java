@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +28,8 @@ public class Frame extends JFrame {
     private ImageIcon mediumImage = new ImageIcon("images/mu.jpg");
     private ImageIcon hardImage = new ImageIcon("images/barcelona.jpg");
 
+    private JLabel titleImage = new JLabel(new ImageIcon("images/easyTitle.jpg"));
+
     private JButton backButton = new JButton(backButtonImage);
     private JButton exitButton = new JButton(exitButtonImage);
     private JButton startButton = new JButton(startButtonImage);
@@ -42,6 +45,7 @@ public class Frame extends JFrame {
     private Image selectedImage = new ImageIcon().getImage();
     private Music currMusic = new Music("introMusic.mp3", true);
     private boolean isMainScreen = false;
+    private boolean gameScreen = false;
 
     private int mouseX, mouseY;
     public Frame() {
@@ -176,10 +180,18 @@ public class Frame extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                currMusic.close();
-                currMusic = new Music("introMusic.mp3", true);
-                currMusic.start();
-                mainPage();
+                if (gameScreen) {
+                    currMusic.close();
+                    currMusic = new Music("gameMusic.mp3", true);
+                    currMusic.start();
+                    gameScreen = !gameScreen;
+                    startGame();
+                } else {
+                    currMusic.close();
+                    currMusic = new Music("introMusic.mp3", true);
+                    currMusic.start();
+                    mainPage();
+                }
             }
         });
 
@@ -210,6 +222,7 @@ public class Frame extends JFrame {
         mediumLabel.setVisible(true);
         hardLabel.setVisible(true);
         isMainScreen = true;
+        titleImage.setVisible(false);
 
     }
 
@@ -225,6 +238,7 @@ public class Frame extends JFrame {
         easyLabel.setVisible(false);
         mediumLabel.setVisible(false);
         hardLabel.setVisible(false);
+        titleImage.setVisible(false);
     }
 
     public void drawLevels() {
@@ -279,6 +293,7 @@ public class Frame extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
+                
                 mediumGame(); 
             }
         });
@@ -300,12 +315,15 @@ public class Frame extends JFrame {
                 hardGame(); 
             }
         });
+        titleImage.setBounds(340, 100, 600, 500);
         add(easyLabel);
         add(mediumLabel);
         add(hardLabel);
         add(easy);
         add(medium);
         add(hard);
+        add(titleImage);
+        titleImage.setVisible(false);
         easy.setVisible(false);
         medium.setVisible(false);
         hard.setVisible(false);
@@ -316,18 +334,30 @@ public class Frame extends JFrame {
     }
 
     public void easyGame() {
-
+        titleImage.setIcon(new ImageIcon("images/easyTitle.jpg"));
+        drawScreen();
     }
 
     public void mediumGame() {
-
+        titleImage.setIcon(new ImageIcon("images/mediumTitle.jpg"));
+        drawScreen();
     }
 
     public void hardGame() {
-
+        titleImage.setIcon(new ImageIcon("images/hardTitle.jpg"));
+        drawScreen();
     }
 
-
+    public void drawScreen() {
+        titleImage.setVisible(true);
+        easy.setVisible(false);
+        medium.setVisible(false);
+        hard.setVisible(false);
+        easyLabel.setVisible(false);
+        mediumLabel.setVisible(false);
+        hardLabel.setVisible(false);
+        gameScreen = true;
+    }
 
 
 
