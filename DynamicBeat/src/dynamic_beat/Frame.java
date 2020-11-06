@@ -14,6 +14,10 @@ import javax.swing.JLabel;
 
 public class Frame extends JFrame { 
 
+    private Image screenImage;
+    private Graphics screenGraphic;
+    private Image backgroundImage = new ImageIcon("images/background.jpg").getImage();
+
     private JLabel background = new JLabel(new ImageIcon("images/background.jpg"));
     private JLabel menuBar = new JLabel(new ImageIcon("images/menuBar.png"));
     private ImageIcon exitButtonImage = new ImageIcon("images/exit.png");
@@ -41,8 +45,13 @@ public class Frame extends JFrame {
     private JButton easyLabel = new JButton(new ImageIcon("images/easylabel.png"));
     private JButton mediumLabel = new JButton(new ImageIcon("images/mediumlabel.png"));
     private JButton hardLabel = new JButton(new ImageIcon("images/hardlabel.png"));
+    
+    private Image bar = new ImageIcon("images/bar.png").getImage();
+    private Image imagebar = new ImageIcon("images/hitbar.png").getImage();
+    private Image judgementLine = new ImageIcon("images/judgementline.png").getImage();
 
-    private Image selectedImage = new ImageIcon().getImage();
+
+    
     private Music currMusic = new Music("introMusic.mp3", true);
     private boolean isMainScreen = false;
     private boolean gameScreen = false;
@@ -223,6 +232,7 @@ public class Frame extends JFrame {
         hardLabel.setVisible(true);
         isMainScreen = true;
         titleImage.setVisible(false);
+        gameScreen = false;
 
     }
 
@@ -335,16 +345,25 @@ public class Frame extends JFrame {
 
     public void easyGame() {
         titleImage.setIcon(new ImageIcon("images/easyTitle.jpg"));
+        currMusic.close();
+        currMusic = new Music("easyMusic.mp3", true);
+        currMusic.start();
         drawScreen();
     }
 
     public void mediumGame() {
         titleImage.setIcon(new ImageIcon("images/mediumTitle.jpg"));
+        currMusic.close();
+        currMusic = new Music("mediumMusic.mp3", true);
+        currMusic.start();
         drawScreen();
     }
 
     public void hardGame() {
         titleImage.setIcon(new ImageIcon("images/hardTitle.jpg"));
+        currMusic.close();
+        currMusic = new Music("hardMusic.mp3", true);
+        currMusic.start();
         drawScreen();
     }
 
@@ -357,6 +376,24 @@ public class Frame extends JFrame {
         mediumLabel.setVisible(false);
         hardLabel.setVisible(false);
         gameScreen = true;
+    }
+
+    public void paint(Graphics g) {
+        screenImage = createImage(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+        screenGraphic = screenImage.getGraphics();
+        screenDraw(screenGraphic);
+        g.drawImage(screenImage, 0, 0, null);
+    }
+
+    public void screenDraw(Graphics g) {
+        g.drawImage(backgroundImage, 0, 0, null);
+
+        if (gameScreen) {
+            g.drawImage(bar, 240, 30, null);
+            g.drawImage(judgementLine, 0, 500, null);
+        }
+        paintComponents(g);
+        this.repaint();
     }
 
 
