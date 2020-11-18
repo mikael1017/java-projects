@@ -19,6 +19,9 @@ public class Email {
         System.out.println("Department: " + this.department);
         this.password = randomPassword(defaultPasswordLength);
         System.out.println("Password: " + this.password);
+        this.alternateEmail = askAlternateEmail();
+        System.out.println("Alternate Email address: " + this.alternateEmail);
+        
     }
 
     // Ask user for the department 
@@ -41,5 +44,12 @@ public class Email {
             password[i] = passwordSet.charAt(rand);
         }
         return new String(password);
+    }
+
+    private String askAlternateEmail() {
+        System.out.print("Enter alternate email address: ");
+        Scanner input = new Scanner(System.in);
+        String alternate = input.nextLine();
+        return alternate;
     }
 }
