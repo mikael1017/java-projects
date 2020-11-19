@@ -12,8 +12,10 @@ public class Email {
     private int defaultPasswordLength = 4;
 
     public Email(String first, String last) {
-        this.firstName = first;
-        this.lastName = last;
+        System.out.print("Enter your first and last name ");
+        Scanner input = new Scanner(System.in);
+        this.firstName = input.next();
+        this.lastName = input.next();
         System.out.println("EMAIL CREATED: " + this.firstName + " " + this.lastName);
         this.department = setDepartment();
         System.out.println("Department: " + this.department);
@@ -83,4 +85,16 @@ public class Email {
             this.alternateEmail = alternate;
         }
     }
+    
+    // Reset password to random default length password
+    private void resetPassword() {
+        String temp = randomPassword(this.defaultPasswordLength);
+        changePassword(temp);
+    }
+
+    private String getEmail() {
+        return this.em;
+    }
+
+
 }
