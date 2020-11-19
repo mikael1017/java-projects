@@ -92,9 +92,5 @@ public class Email {
         changePassword(temp);
     }
 
-    private String getEmail() {
-        return this.em;
-    }
-
 
 }
