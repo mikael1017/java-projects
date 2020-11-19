@@ -20,7 +20,8 @@ public class Email {
         this.password = randomPassword(defaultPasswordLength);
         System.out.println("Password: " + this.password);
         this.alternateEmail = askAlternateEmail();
-        System.out.println("Alternate Email address: " + this.alternateEmail);
+        System.out.println("Your alternate Email address: " + this.alternateEmail);
+        setMailboxCapacity(100);
         
     }
 
@@ -50,6 +51,31 @@ public class Email {
         System.out.print("Enter alternate email address: ");
         Scanner input = new Scanner(System.in);
         String alternate = input.nextLine();
+        while (!validEmail(alternate)) {
+            System.out.print("Invalid address! please enter valid email address: ");
+            alternate = input.nextLine();
+        }
         return alternate;
+    }
+
+    private boolean validEmail(String email) {
+        if (email.contains("@")) {
+            return true;
+        }
+        return false;
+    }
+
+    private void setMailboxCapacity(int capacity) {
+        this.mailboxCapacity = capacity;
+    }
+    
+    private void changePassword(String requestPassword) {
+        this.password = requestPassword;
+    }
+
+    private void changeAlternateEmail(String alternate) {
+        if (validEmail(alternate) {
+            this.alternateEmail = alternate;
+        }
     }
 }
