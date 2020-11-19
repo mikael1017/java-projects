@@ -47,6 +47,7 @@ public class Email {
         return new String(password);
     }
 
+    // Ask user an atlernate email address
     private String askAlternateEmail() {
         System.out.print("Enter alternate email address: ");
         Scanner input = new Scanner(System.in);
@@ -58,6 +59,7 @@ public class Email {
         return alternate;
     }
 
+    // Helper method to check if email address is valid
     private boolean validEmail(String email) {
         if (email.contains("@")) {
             return true;
@@ -65,14 +67,17 @@ public class Email {
         return false;
     }
 
+    // set mailboxcapacity to input capacity
     private void setMailboxCapacity(int capacity) {
         this.mailboxCapacity = capacity;
     }
     
+    // change password
     private void changePassword(String requestPassword) {
         this.password = requestPassword;
     }
 
+    // change alternate email address
     private void changeAlternateEmail(String alternate) {
         if (validEmail(alternate) {
             this.alternateEmail = alternate;
