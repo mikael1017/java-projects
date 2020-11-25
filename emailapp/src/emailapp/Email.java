@@ -92,5 +92,14 @@ public class Email {
         changePassword(temp);
     }
 
+    private void findEmail() {
+        System.out.print("What's the alternate email address that you used to sign up? ");
+        Scanner input = new Scanner(System.in);
+        String alternate = input.nextLine();
+        if (alternate.equals(this.alternateEmail)) {
+            System.out.println("Your email address is " + this.firstName + this.lastName + "@project.com");
+        }
+    }
+
 
 }
